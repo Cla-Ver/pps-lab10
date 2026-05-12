@@ -68,3 +68,7 @@ all_bigger(cons(H1, T1), cons(H2, T2)) :- greater(H1, H2), all_bigger(T1, T2).
 
 sublist(nil, _).
 sublist(cons(H, T), List2) :- search(H, List2), sublist(T, List2).
+
+%Assuming the first value is the starting point and not how long the list should be (which should be 1 less)
+seqR(zero, nil).
+seqR(s(N), cons(N, T)) :- seqR(N, T).
