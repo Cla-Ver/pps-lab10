@@ -72,3 +72,9 @@ sublist(cons(H, T), List2) :- search(H, List2), sublist(T, List2).
 %Assuming the first value is the starting point and not how long the list should be (which should be 1 less)
 seqR(zero, nil).
 seqR(s(N), cons(N, T)) :- seqR(N, T).
+
+seqR2(zero, nil).
+seqR2(s(N), List) :- seqR2(N, X), last(X, N, List).
+
+last(nil, E, cons(E, nil)).
+last(cons(H, T), E, cons(H, X)) :- last(T, E, X).
