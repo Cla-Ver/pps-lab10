@@ -65,3 +65,6 @@ same(cons(H, T1), cons(H, T2)) :- same(T1, T2).
 
 all_bigger(nil, nil).
 all_bigger(cons(H1, T1), cons(H2, T2)) :- greater(H1, H2), all_bigger(T1, T2).
+
+sublist(nil, _).
+sublist(cons(H, T), List2) :- search(H, List2), sublist(T, List2).
