@@ -49,7 +49,19 @@ count(nil, E, N, N).
 count(cons(E, L), E, N, M) :- count(L, E, s(N), M).
 count(cons(E, L), E2, N, M) :- E \= E2, count(L, E2, N, M).
 
-max(cons(H, T), M) :- max(cons(H, T), M, H).
+max(cons(H, T), Max) :- max(T, H, Max).
 max(nil, Max, Max).
-max(cons(H, T), H, Max) :- greater(H, Max), max(T, H, H).
-max(cons(_, T), TempMax, Max) :- max(T, TempMax, Max).
+max(cons(H, T), TempMax, Max) :- greater(TempMax, H), max(T, TempMax, Max).
+max(cons(H, T), TempMax, Max) :- greater(H, TempMax) ; H == TempMax, max(T, H, Max).
+
+%min(cons(H, T), Min) :- min(T, H, Min).
+%min(nil, Min, Min).
+%min(cons(H, T), TempMin, Min) :- greater(H, TempMin), min(T, TempMin, Min).
+%min(cons(H, T), TempMin, Min) :- greater(TempMin, H), min(T, H, Min).
+%min(cons(H, T), TempMin, Min) :- H == TempMin, min(T, H, Min).
+
+min-max(cons(H, T), Min, Max) :- min-max(T, H, H, Min, Max).
+min-max(nil, Min, Max, Min, Max).
+min-max(cons(H, T), TempMin, TempMax, Min, Max) :- greater(H, TempMax), min-max(T, TempMin, H, Min, Max).
+min-max(cons(H, T), TempMin, TempMax, Min, Max) :- greater(TempMin, H), min-max(T, H, TempMax, Min, Max).
+min-max(cons(H, T), TempMin, TempMax, Min, Max) :- greater(TempMax, H) ; TempMax == H, greater(H, TempMin) ; TempMin == H, min-max(T, TempMin, TempMax, Min, Max).
