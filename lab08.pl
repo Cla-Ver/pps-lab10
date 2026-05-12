@@ -54,14 +54,14 @@ max(nil, Max, Max).
 max(cons(H, T), TempMax, Max) :- greater(TempMax, H), max(T, TempMax, Max).
 max(cons(H, T), TempMax, Max) :- greater(H, TempMax) ; H == TempMax, max(T, H, Max).
 
-%min(cons(H, T), Min) :- min(T, H, Min).
-%min(nil, Min, Min).
-%min(cons(H, T), TempMin, Min) :- greater(H, TempMin), min(T, TempMin, Min).
-%min(cons(H, T), TempMin, Min) :- greater(TempMin, H), min(T, H, Min).
-%min(cons(H, T), TempMin, Min) :- H == TempMin, min(T, H, Min).
-
 min-max(cons(H, T), Min, Max) :- min-max(T, H, H, Min, Max).
 min-max(nil, Min, Max, Min, Max).
 min-max(cons(H, T), TempMin, TempMax, Min, Max) :- greater(H, TempMax), min-max(T, TempMin, H, Min, Max).
 min-max(cons(H, T), TempMin, TempMax, Min, Max) :- greater(TempMin, H), min-max(T, H, TempMax, Min, Max).
 min-max(cons(H, T), TempMin, TempMax, Min, Max) :- greater(TempMax, H) ; TempMax == H, greater(H, TempMin) ; TempMin == H, min-max(T, TempMin, TempMax, Min, Max).
+
+same(nil, nil).
+same(cons(H, T1), cons(H, T2)) :- same(T1, T2).
+
+all_bigger(nil, nil).
+all_bigger(cons(H1, T1), cons(H2, T2)) :- greater(H1, H2), all_bigger(T1, T2).
