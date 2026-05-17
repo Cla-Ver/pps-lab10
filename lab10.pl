@@ -1,4 +1,4 @@
-greater(s(N), zero).
+greater(s(N), zero).
 greater(s(N), s(M)) :- greater(N, M).
 
 % ---- Esercizi Lab ----
