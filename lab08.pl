@@ -1,30 +1,7 @@
-succ(X, s(X)).
-
-sum(X, zero, X).
-sum(zero, X, X).
-sum(X, s(Y), s(O)) :- sum(X, Y, O).
-
-mul(X, zero, zero).
-mul(X, s(Y), O) :- mul(X, Y, W), sum(X, W, O).
-
-factorial(zero, s(zero)).
-factorial(s(N), O) :- factorial(N, Temp), mul(s(N), Temp , O).
-
-greater(s(N), zero).
+greater(s(N), zero).
 greater(s(N), s(M)) :- greater(N, M).
 
-%Prende un elemento E e una lista, e dice se E è nella lista
-element(E, cons(E, _)).
-element(E, cons(_, T)) :- element(E, T).
-
 % ---- Esercizi Lab ----
-
-a(1).
-a(X) :- b(X), b(X).
-b(1).
-b(2).
-c(X) :- b(X).
-c(X) :- b(X), c(X).
 
 search(X, cons(X, _)).
 search(X, cons(_, Xs)) :- search(X, Xs).
