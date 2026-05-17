@@ -58,7 +58,10 @@ min-max(cons(H, T), Min, Max) :- min-max(T, H, H, Min, Max).
 min-max(nil, Min, Max, Min, Max).
 min-max(cons(H, T), TempMin, TempMax, Min, Max) :- greater(H, TempMax), min-max(T, TempMin, H, Min, Max).
 min-max(cons(H, T), TempMin, TempMax, Min, Max) :- greater(TempMin, H), min-max(T, H, TempMax, Min, Max).
-min-max(cons(H, T), TempMin, TempMax, Min, Max) :- greater(TempMax, H) ; TempMax == H, greater(H, TempMin) ; TempMin == H, min-max(T, TempMin, TempMax, Min, Max).
+min-max(cons(H, T), TempMin, TempMax, Min, Max) :- greater(TempMax, H), greater(H, TempMin), min-max(T, TempMin, TempMax, Min, Max).
+min-max(cons(H, T), TempMin, TempMax, Min, Max) :- TempMax == H, greater(H, TempMin), min-max(T, TempMin, TempMax, Min, Max).
+min-max(cons(H, T), TempMin, TempMax, Min, Max) :- greater(TempMax, H), TempMin == H, min-max(T, TempMin, TempMax, Min, Max).
+min-max(cons(H, T), TempMin, TempMax, Min, Max) :- TempMax == H, TempMin == H, min-max(T, TempMin, TempMax, Min, Max).
 
 same(nil, nil).
 same(cons(H, T1), cons(H, T2)) :- same(T1, T2).
